@@ -4,7 +4,7 @@ from . import auth
 from ..models import User
 from .forms import RegistrationForm, LoginForm
 from .. import db
-# from ..email import mail_message
+from ..email import mail_message
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -18,7 +18,7 @@ def login():
 
         flash('Invalid username or Password')
 
-    title = "watchlist login"
+    title = "Pitch App Login"
     return render_template('auth/login.html',login_form = login_form,title=title)
 
 @auth.route('/logout')
@@ -35,7 +35,7 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        mail_message("Welcome to watchlist","email/welcome_user",user.email,user=user)
+        mail_message("Welcome to the Pitch App","email/welcome_user",user.email,user=user)
 
         return redirect(url_for('auth.login'))
     title = "New Account"
